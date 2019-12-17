@@ -1,0 +1,56 @@
+{
+  "variables": {
+    "aws_access_key_id": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_access_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "aws_session_token": "{{env `AWS_SESSION_TOKEN`}}",
+    "time_zone": "Europe/Paris",
+    "region": "eu-west-3",
+    "ssh_username": "ubuntu",
+    "source_ami": "ami-087855b6c8b59a9e4"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key_id`}}",
+      "secret_key": "{{user `aws_secret_access_key`}}",
+      "token": "{{user `aws_session_token`}}",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "{{user `ssh_username`}}",
+      "associate_public_ip_address": "true",
+      "ami_name": "aws-ubuntu-base {{timestamp}}",
+      "tags": {
+        "Name": "AWS Ubuntu 18.04 Base Image with Kubernetes - Node Configuration",
+        "SourceAMI": "{{user `source_ami`}}",
+        "DockerVersion": "17.06.2"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/1-install-os-packages.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/2-install-kubernetes.sh"
+    },
+    {
+      "type": "file",
+      "source": "files/.bashrc",
+      "destination": "/home/{{user `ssh_username`}}/.bashrc2"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/3-prompt-custom.sh"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
+  ]
+}

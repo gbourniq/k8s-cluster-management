@@ -1,0 +1,9 @@
+name: k8s
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - ansible
+  - awscli
+  - make
+      
