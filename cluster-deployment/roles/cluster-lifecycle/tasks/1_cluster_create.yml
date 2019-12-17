@@ -20,7 +20,7 @@
       - device_name: /dev/xvda
         volume_type: gp2  #insert the volume code here
         volume_size: 8  #size is in GB
-  register: ec2-master
+  register: ec2
   tags:
     - cluster-create
 
@@ -43,7 +43,7 @@
       - device_name: /dev/xvda
         volume_type: gp2  #insert the volume code here
         volume_size: 8  #size is in GB
-  register: ec2-node
+  register: ec2
   tags:
     - cluster-create
 
