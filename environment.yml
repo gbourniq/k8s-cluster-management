@@ -6,4 +6,7 @@ dependencies:
   - ansible
   - awscli
   - make
+  - pip
+  - pip:
+    - boto
       

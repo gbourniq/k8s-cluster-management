@@ -25,3 +25,6 @@ REGION: eu-west-3
 MASTER_INSTANCE_TAG_NAME: k8s-master
 NODE_INSTANCE_TAG_NAME: k8s-node
 INSTANCE_TAG_TYPE: k8s-cluster
+
+# need this line, other it errors "boto required for ec2 module"
+ansible_python_interpreter: /Users/guillaume.bournique/anaconda3/envs/k8s/bin/python
