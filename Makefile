@@ -24,14 +24,19 @@ cluster-create:
 		-vv
 	${SUCCESS} "Instances created successfully with tag: type=k8s-cluster"
 
+
 cluster-configure:
-	${INFO} "Instructions:"
-	${INFO} "1. Run make cluster-create"
-	${INFO} "2. ssh into Master, run master_config.sh"
-	${INFO} "3. Copy the kubeadm join command from the output"
-	${INFO} "4. ssh into Nodes and run the join command"
-	${INFO} "5. Run the following command on Master <sudo kubectl get nodes>"
+	${INFO} "Cluster configuration instructions"
+	${INSTRUCTION} "1. Run <make cluster-create> command"
+	${INSTRUCTION} "2. SSH into Master:"
+	${INSTRUCTION} "   Set hostname with <sudo hostnamectl set-hostname k8s-master>"
+	${INSTRUCTION} "   Run master_config.sh script"
+	${INSTRUCTION} "   Copy the <kubeadm join ...> command from the output"
+	${INSTRUCTION} "3. SSH into each Nodes:"
+	${INSTRUCTION} "   Set hostname with <sudo hostnamectl set-hostname k8s-node-X>"
+	${INSTRUCTION} "   Run the <sudo kubeadm join ...> command"
 	
+
 cluster-stop:
 	${INFO} "Stopping all instances with the following tag: type=k8s-cluster"
 	@ ansible-playbook ${ANSIBLE_DIR}/cluster_lifecycle_playbook.yml \
