@@ -1,14 +1,16 @@
+# Activate conda environment
+- conda activate k8s
 
 # Stop cluster:
-- make ansible-cluster-start
+- make cluster-start
 
 # Create cluster:
-- make ansible-cluster-stop
+- make cluster-stop
 
 # Steps create cluster:
 - create master and node amis using packer > save ami ids
 - populate ami ids, instance label name (k8s-node), and exact count
-- run make ansible-instance-launch for each instance
+- run make instance-create for each instance
 - ssh into the manager instance
     - sudo hostnamectl set-hostname k8s-master
     - run the manager_config.sh script and note the join command
@@ -17,10 +19,14 @@
     - use the join command to join the cluster
 - need to configure elastic ips for master instance so it ip stays the same when restarted
 
+# steps to create Amazon Machine Images (Instance templates) for Master and Node instances:
+- check variables in package.json
+    - give proper name to the "ami_name" key. eg. AWS Ubuntu 18.04 Base Image with Kubernetes - Node Configuration
+- run make build-ami
+- note the ami id for the relevant instances (master and nodes)
 
-# create encrypted password
+# create ansible encrypted password
 ansible-vault encrypt_string --vault-id user@~/.ssh/ansible-vault-pw 'uCCTvzTZZCrmT3nR+2EZPuGqwefqwefqwefweqfweKBEQIXcuLEwefzErCkgf' --name 'aws_secret_key'
-
 
 # Note:
 - For ansible to support instance creation in eu-west-3, need to replace endpoints.json.

@@ -34,14 +34,3 @@ sudo rm ~/.bashrc
 echo "### Rename ~/.bashrc2 to ~/.bashrc ###"
 # echo 'PWD $(pwd) LS $(ls -l)'
 sudo mv ~/.bashrc2 ~/.bashrc
-
-# command below when create AMI for Cluster Node
-# echo "### Give execute permission to ~/master_config.sh ###"
-# sudo chmod +x ~/master_config.sh
-# and need to add the following to packer.json
-# {
-#    "type": "file",
-#    "source": "files/master_config.sh",
-#    "destination": "/home/{{user `ssh_username`}}/master_config.sh"
-# },
-

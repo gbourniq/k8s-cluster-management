@@ -6,7 +6,9 @@
     "time_zone": "Europe/Paris",
     "region": "eu-west-3",
     "ssh_username": "ubuntu",
-    "source_ami": "ami-087855b6c8b59a9e4"
+    "source_ami": "ami-087855b6c8b59a9e4",
+    "ami_name": "AWS Ubuntu 18.04 Base Image with Kubernetes - Node Configuration",
+    "packer_dir": "create-AMIs"
   },
   "builders": [
     {
@@ -19,9 +21,9 @@
       "instance_type": "t2.micro",
       "ssh_username": "{{user `ssh_username`}}",
       "associate_public_ip_address": "true",
-      "ami_name": "aws-ubuntu-base {{timestamp}}",
+      "ami_name": "{{user `ami_name`}}",
       "tags": {
-        "Name": "AWS Ubuntu 18.04 Base Image with Kubernetes - Node Configuration",
+        "Name": "{{user `aws_session_token`}}",
         "SourceAMI": "{{user `source_ami`}}",
         "DockerVersion": "17.06.2"
       }
@@ -30,20 +32,25 @@
   "provisioners": [
     {
       "type": "shell",
-      "script": "scripts/1-install-os-packages.sh"
+      "script": "{{user `packer_dir`}}/scripts/1-install-os-packages.sh"
     },
     {
       "type": "shell",
-      "script": "scripts/2-install-kubernetes.sh"
+      "script": "{{user `packer_dir`}}/scripts/2-install-kubernetes.sh"
     },
     {
       "type": "file",
-      "source": "files/.bashrc",
+      "source": "{{user `packer_dir`}}/files/.bashrc",
       "destination": "/home/{{user `ssh_username`}}/.bashrc2"
     },
     {
       "type": "shell",
-      "script": "scripts/3-prompt-custom.sh"
+      "script": "{{user `packer_dir`}}/scripts/3-prompt-custom.sh"
+    },
+    {
+      "type": "file",
+      "source": "{{user `packer_dir`}}/files/master_config.sh",
+      "destination": "/home/{{user `ssh_username`}}/master_config.sh"
     }
   ],
   "post-processors": [

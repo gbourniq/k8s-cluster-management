@@ -1,0 +1,57 @@
+---
+# This playbook contains all actions that will be run on "local" host.
+
+- name: Create 1 EC2 Master instance for Kubernetes cluster
+  ec2:
+    key_name: "{{ AWS_KEY_PATH }}"
+    aws_access_key: "{{ AWS_ACCESS_KEY }}"
+    aws_secret_key: "{{ AWS_SECRET_KEY }}"
+    image: "{{ AMI_ID_MASTER }}"
+    wait: yes
+    instance_type: "{{ INSTANCE_TYPE }}"
+    group_id: "{{ SECURITY_GROUP }}"
+    region: "{{ REGION }}"
+    instance_tags:
+      Name: "{{ MASTER_INSTANCE_TAG_NAME }}"
+      Type: "{{ INSTANCE_TAG_TYPE }}"
+    exact_count: 1
+    count_tag: ubuntuserver
+    volumes:
+      - device_name: /dev/xvda
+        volume_type: gp2  #insert the volume code here
+        volume_size: 8  #size is in GB
+  register: ec2-master
+  tags:
+    - cluster-create
+
+- name: Create 2 EC2 Node instances for Kubernetes cluster
+  ec2:
+    key_name: "{{ AWS_KEY_PATH }}"
+    aws_access_key: "{{ AWS_ACCESS_KEY }}"
+    aws_secret_key: "{{ AWS_SECRET_KEY }}"
+    image: "{{ AMI_ID_NODE }}"
+    wait: yes
+    instance_type: "{{ INSTANCE_TYPE }}"
+    group_id: "{{ SECURITY_GROUP }}"
+    region: "{{ REGION }}"
+    instance_tags:
+      Name: "{{ NODE_INSTANCE_TAG_NAME }}"
+      Type: "{{ INSTANCE_TAG_TYPE }}"
+    exact_count: 2
+    count_tag: ubuntuserver
+    volumes:
+      - device_name: /dev/xvda
+        volume_type: gp2  #insert the volume code here
+        volume_size: 8  #size is in GB
+  register: ec2-node
+  tags:
+    - cluster-create
+
+# - name: Store instance details
+#   shell: "echo ANSIBLE_HOST={{ ec2.instances[0].dns_name }} >> .current-instance-id-env"
+#   register: cmdln
+#   failed_when: "cmdln.rc == 2"
+#   tags:
+#     - instance-create
+
+ 
