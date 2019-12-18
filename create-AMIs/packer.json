@@ -25,7 +25,7 @@
       "tags": {
         "Name": "{{user `ami_name`}}",
         "SourceAMI": "{{user `source_ami`}}",
-        "DockerVersion": "17.06.2"
+        "KubernetesVersion": "v1.17"
       }
     }
   ],
@@ -51,6 +51,11 @@
       "type": "file",
       "source": "{{user `packer_dir`}}/files/master_config.sh",
       "destination": "/home/{{user `ssh_username`}}/master_config.sh"
+    },
+    {
+      "type": "file",
+      "source": "{{user `packer_dir`}}/files/subnet.env",
+      "destination": "/run/flannel/subnet.env"
     }
   ],
   "post-processors": [

@@ -21,7 +21,7 @@ cluster-create:
 	@ ansible-playbook ${ANSIBLE_DIR}/cluster_lifecycle_playbook.yml \
 		--vault-id user@~/.ssh/ansible-vault-pw \
 		--tags=cluster-create \
-		-vv
+		-vvv
 	${SUCCESS} "Instances created successfully with tag: type=k8s-cluster"
 
 

@@ -1,7 +1,7 @@
 ---
 # This playbook contains all actions that will be run on "local" host.
 
-- name: Create 1 EC2 Master instance for Kubernetes cluster
+- name: "Create {{ MASTERS_COUNT }} EC2 instance of type {{ INSTANCE_TYPE_MASTER }} for Kubernetes cluster"
   ec2:
     key_name: "{{ AWS_KEY_PATH }}"
     aws_access_key: "{{ AWS_ACCESS_KEY }}"
@@ -14,7 +14,7 @@
     instance_tags:
       Name: "{{ MASTER_INSTANCE_TAG_NAME }}"
       Type: "{{ INSTANCE_TAG_TYPE }}"
-    exact_count: 1
+    exact_count: "{{ MASTERS_COUNT }}"
     count_tag: ubuntuserver
     volumes:
       - device_name: /dev/xvda
@@ -24,7 +24,7 @@
   tags:
     - cluster-create
 
-- name: Create 2 EC2 Node instances for Kubernetes cluster
+- name: "Create {{ NODES_COUNT }} EC2 instance of type {{ INSTANCE_TYPE_NODE }} for Kubernetes cluster"
   ec2:
     key_name: "{{ AWS_KEY_PATH }}"
     aws_access_key: "{{ AWS_ACCESS_KEY }}"
@@ -37,7 +37,7 @@
     instance_tags:
       Name: "{{ NODE_INSTANCE_TAG_NAME }}"
       Type: "{{ INSTANCE_TAG_TYPE }}"
-    exact_count: 3
+    exact_count: "{{ NODES_COUNT }}"
     count_tag: ubuntuserver
     volumes:
       - device_name: /dev/xvda
