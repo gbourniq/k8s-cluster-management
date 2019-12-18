@@ -3,7 +3,6 @@
 
 # Create Amazon Machine Images (Instance templates) for Master and Node instances:
 - check variables in package.json
-    - give proper name to the "ami_name" key. eg. AWS Ubuntu 18.04 Base Image with Kubernetes - Node Configuration
 - run make build-ami
 - note the ami id for the relevant instances (master and nodes)
 

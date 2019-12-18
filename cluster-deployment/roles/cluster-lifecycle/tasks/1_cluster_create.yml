@@ -6,9 +6,9 @@
     key_name: "{{ AWS_KEY_PATH }}"
     aws_access_key: "{{ AWS_ACCESS_KEY }}"
     aws_secret_key: "{{ AWS_SECRET_KEY }}"
-    image: "{{ AMI_ID_MASTER }}"
+    image: "{{ AMI_ID }}"
     wait: yes
-    instance_type: "{{ INSTANCE_TYPE }}"
+    instance_type: "{{ INSTANCE_TYPE_MASTER }}"
     group_id: "{{ SECURITY_GROUP }}"
     region: "{{ REGION }}"
     instance_tags:
@@ -29,15 +29,15 @@
     key_name: "{{ AWS_KEY_PATH }}"
     aws_access_key: "{{ AWS_ACCESS_KEY }}"
     aws_secret_key: "{{ AWS_SECRET_KEY }}"
-    image: "{{ AMI_ID_NODE }}"
+    image: "{{ AMI_ID }}"
     wait: yes
-    instance_type: "{{ INSTANCE_TYPE }}"
+    instance_type: "{{ INSTANCE_TYPE_NODE }}"
     group_id: "{{ SECURITY_GROUP }}"
     region: "{{ REGION }}"
     instance_tags:
       Name: "{{ NODE_INSTANCE_TAG_NAME }}"
       Type: "{{ INSTANCE_TAG_TYPE }}"
-    exact_count: 2
+    exact_count: 3
     count_tag: ubuntuserver
     volumes:
       - device_name: /dev/xvda

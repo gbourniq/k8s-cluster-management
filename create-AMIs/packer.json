@@ -7,7 +7,7 @@
     "region": "eu-west-3",
     "ssh_username": "ubuntu",
     "source_ami": "ami-087855b6c8b59a9e4",
-    "ami_name": "AWS Ubuntu 18.04 Base Image with Kubernetes - Node Configuration",
+    "ami_name": "Ubuntu 18.04 with Kubernetes",
     "packer_dir": "create-AMIs"
   },
   "builders": [
@@ -21,9 +21,9 @@
       "instance_type": "t2.micro",
       "ssh_username": "{{user `ssh_username`}}",
       "associate_public_ip_address": "true",
-      "ami_name": "{{user `ami_name`}}",
+      "ami_name": "aws-ubuntu-kubernetes-{{timestamp}}",
       "tags": {
-        "Name": "{{user `aws_session_token`}}",
+        "Name": "{{user `ami_name`}}",
         "SourceAMI": "{{user `source_ami`}}",
         "DockerVersion": "17.06.2"
       }
