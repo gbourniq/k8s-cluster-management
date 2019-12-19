@@ -1,6 +1,6 @@
 ANSIBLE_DIR=cluster-deployment
 PACKER_DIR=create-AMIs
-MASTER_INSTANCE_IP=ec2-15-188-17-57.eu-west-3.compute.amazonaws.com
+MASTER_INSTANCE_IP=ec2-15-188-177-177.eu-west-3.compute.amazonaws.com
 
 SHELL := /bin/bash
 
