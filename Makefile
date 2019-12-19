@@ -30,10 +30,11 @@ cluster-configure:
 	${INSTRUCTION} "1. Run <make cluster-create> command"
 	${INSTRUCTION} "2. SSH into Master:"
 	${INSTRUCTION} "   Set hostname with <sudo hostnamectl set-hostname k8s-master>"
-	${INSTRUCTION} "   Run master_config.sh script"
+	${INSTRUCTION} "   Run master_firstrun.sh script"
 	${INSTRUCTION} "   Copy the <kubeadm join ...> command from the output"
 	${INSTRUCTION} "3. SSH into each Nodes:"
 	${INSTRUCTION} "   Set hostname with <sudo hostnamectl set-hostname k8s-node-X>"
+	${INSTRUCTION} "   Run node_firstrun.sh script"
 	${INSTRUCTION} "   Run the <sudo kubeadm join ...> command"
 	
 
