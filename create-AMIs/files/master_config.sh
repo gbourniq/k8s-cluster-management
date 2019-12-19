@@ -4,7 +4,8 @@ set -e
 # MASTER NODE CONFIGURATIONS
 
 # Initialize Kubernetes on the master node
-sudo kubeadm init # need to extract the kubeadm join command from the output
+# --ignore flag to bypass the 2 CPUs requirement
+sudo kubeadm init --ignore-preflight-errors=cpu # need to extract the kubeadm join command from the output
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config

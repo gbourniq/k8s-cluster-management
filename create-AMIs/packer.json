@@ -55,7 +55,11 @@
     {
       "type": "file",
       "source": "{{user `packer_dir`}}/files/subnet.env",
-      "destination": "/run/flannel/subnet.env"
+      "destination": "/home/{{user `ssh_username`}}/subnet.env"
+    },
+    {
+      "type": "shell",
+      "script": "{{user `packer_dir`}}/scripts/4-file-management.sh"
     }
   ],
   "post-processors": [
