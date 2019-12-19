@@ -24,7 +24,7 @@
   tags:
     - cluster-create
 
-- name: "Create {{ NODES_COUNT }} EC2 instance of type {{ INSTANCE_TYPE_NODE }} for Kubernetes cluster"
+- name: "Create {{ NODES_COUNT }} EC2 instances of type {{ INSTANCE_TYPE_NODE }} for Kubernetes cluster"
   ec2:
     key_name: "{{ AWS_KEY_PATH }}"
     aws_access_key: "{{ AWS_ACCESS_KEY }}"

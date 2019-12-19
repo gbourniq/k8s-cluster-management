@@ -7,7 +7,6 @@ git config --global alias.br branch
 git config --global alias.ci commit
 git config --global alias.st status
 
-
 echo "### Installing Docker completion for Linux ###"
 sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
 
@@ -27,3 +26,10 @@ set completion-ignore-case on
 "\e[Z": menu-complete-backward
 EOF
 
+echo "### Delete old ~/.bashrc ###"
+sudo rm ~/.bashrc
+# sudo rm /home/{{user `ssh_username`}}/.bashrc
+
+echo "### Rename ~/.bashrc2 to ~/.bashrc ###"
+# echo 'PWD $(pwd) LS $(ls -l)'
+sudo mv ~/.bashrc2 ~/.bashrc

@@ -1,2 +1,3 @@
 .env
 cluster-deployment/roles/setup/vars/ansible-vault-pw
+create-AMIs/manifest.json

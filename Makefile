@@ -17,11 +17,11 @@ ansible-checksyntax:
 	${SUCCESS} "Syntax check complete"
 
 cluster-create:
-	${INFO} "Running ansible playbook to create the following ec2 instances: 1 Master, 2 Nodes"
+	${INFO} "Running ansible playbook to create the following ec2 instances: 1 Master, X Nodes"
 	@ ansible-playbook ${ANSIBLE_DIR}/cluster_lifecycle_playbook.yml \
 		--vault-id user@~/.ssh/ansible-vault-pw \
 		--tags=cluster-create \
-		-vvv
+		-vv
 	${SUCCESS} "Instances created successfully with tag: type=k8s-cluster"
 
 
