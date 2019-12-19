@@ -53,7 +53,16 @@
       "artifact_id": "eu-west-3:ami-09d74af6c4cb29593",
       "packer_run_uuid": "415ae0b8-e7ac-d0ec-d728-993b4b8909e5",
       "custom_data": null
+    },
+    {
+      "name": "amazon-ebs",
+      "builder_type": "amazon-ebs",
+      "build_time": 1576780798,
+      "files": null,
+      "artifact_id": "eu-west-3:ami-09755588fffb6d3c3",
+      "packer_run_uuid": "4ac178d3-53ff-71dc-98bc-820f6a543010",
+      "custom_data": null
     }
   ],
-  "last_run_uuid": "415ae0b8-e7ac-d0ec-d728-993b4b8909e5"
+  "last_run_uuid": "4ac178d3-53ff-71dc-98bc-820f6a543010"
 }
