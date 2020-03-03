@@ -165,3 +165,5 @@ fi
 #   Bash completion for kubectl
     source <(kubectl completion bash)
     alias k='kubectl'
+
+    alias kev="kubectl get events  --sort-by='.metadata.creationTimestamp'"
