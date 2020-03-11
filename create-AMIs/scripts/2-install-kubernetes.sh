@@ -13,6 +13,16 @@ docker --version
 # Enable Docker to start on instance start up
 sudo systemctl enable docker
 
+# Run Docker commands without sudo
+# Add the docker group if it doesn't already exist
+sudo groupadd docker
+
+# Add the connected user $USER to the docker group
+sudo gpasswd -a $USER docker
+
+# Restart the docker daemon
+sudo service docker restart
+
 # Add the Kubernetes signing key
 sudo apt install -y curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
@@ -31,3 +41,4 @@ sudo swapoff -a
 
 ## generate new token and save join command in variable
 # cmd=$(kubeadm token create --print-join-command)
+
