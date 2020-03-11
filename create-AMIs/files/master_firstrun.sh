@@ -23,3 +23,6 @@ sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Do
 # populate subnet.env file manually
 sudo mkdir /run/flannel/
 sudo mv ~/subnet.env /run/flannel/subnet.env
+
+# if master is the only instance running in the cluster, run
+# kubectl taint nodes $(hostname) node-role.kubernetes.io/master:NoSchedule-
